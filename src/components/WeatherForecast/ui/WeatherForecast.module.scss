@@ -1,0 +1,22 @@
+.WeatherForecast {
+  padding-top: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wind {
+  display: flex;
+  gap: 10px;
+}
+
+.forecast {
+  list-style-type: none;
+  display: flex;
+  gap: 10px;
+}
+
+.sun {
+  display: flex;
+  gap: 10px;
+}
