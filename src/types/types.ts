@@ -1,45 +1,43 @@
 export type forecastType = {
-	clouds: {
-		all: number;
-	};
-	cod: number;
-	coord: {
-		lon: number;
-		lat: number;
-	};
-	dt: number;
-	id: number;
-	main: {
-		feels_like: number;
-		grnd_level: number;
-		humidity: number;
-		pressure: number;
-		sea_level: number;
-		temp: number;
-		temp_max: number;
-		temp_min: number;
-	};
-	name: string;
-	sys: {
+	city: {
 		country: string;
 		id: number;
+		name: string;
+		population: number;
 		sunrise: number;
 		sunset: number;
-		type: number;
+		timezone: number;
 	};
-	timezone: number;
-	visibility: number;
-	weather: [
+	list: [
 		{
-			description: string;
-			icon: string;
-			id: number;
-			main: string;
+			dt: number;
+			main: {
+				feels_like: number;
+				humidity: number;
+				pressure: number;
+				temp: number;
+				temp_max: number;
+				temp_min: number;
+			};
+			weather: [
+				{
+					main: string;
+					icon: string;
+					description: string;
+				},
+			];
+			wind: {
+				speed: number;
+				gust: number;
+				deg: number;
+			};
+			clouds: {
+				all: number;
+			};
+			pop: number;
+			visibility: number;
 		},
 	];
-	wind: {
-		deg: number;
-		gust: number;
-		speed: number;
-	};
+	sunrise: number;
+	sunset: number;
 };

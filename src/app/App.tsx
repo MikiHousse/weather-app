@@ -1,31 +1,30 @@
 import { WeatherForecast } from 'components/WeatherForecast';
 import { useEffect, useState } from 'react';
 import { forecastType } from 'types/types';
+import './style/index.scss';
 
 interface AppProps {}
 
 export const App = ({}: AppProps) => {
 	const API =
-		'http://api.openweathermap.org/data/2.5/weather?id=524901&&appid=083a784422196bb0c3f148b1cfa6709a';
-
-	const [weatherData, setWeatherData] = useState<forecastType | null>(null);
-
+		'https://api.openweathermap.org/data/2.5/forecast?lat=55.7522&lon=37.6156&units=metric&lang=en&appid=083a784422196bb0c3f148b1cfa6709a';
+	const [forecastData, setForecastData] = useState<forecastType | null>(null);
 	useEffect(() => {
 		fetch(API)
 			.then((response) => response.json())
-			.then((data) => setWeatherData(data))
+			.then((data) => setForecastData(data))
 			.catch((err) => console.error(err));
 	}, []);
 
-	if (!weatherData) {
+	if (!forecastData) {
 		return <div>...Loading</div>;
 	}
 
-	console.log(weatherData);
+	console.log(forecastData);
 
 	return (
-		<div>
-			<WeatherForecast weatherData={weatherData} />
+		<div className='app'>
+			<WeatherForecast forecastData={forecastData} />
 		</div>
 	);
 };
