@@ -1,5 +1,24 @@
 .Tile {
-  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  padding: 10px;
   border-radius: 5px;
   background: rgba(255, 255, 255, 0.25);
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.30);
+  }
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+}
+
+.info {
+  padding-top: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

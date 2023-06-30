@@ -1,10 +1,17 @@
-import { ReactNode } from 'react';
 import cls from './Tile.module.scss';
 
 interface TileProps {
-	children: ReactNode;
+	title?: string;
+	info?: string | JSX.Element | number;
 }
 
-export const Tile = ({ children }: TileProps) => {
-	return <div className={cls.Tile}>{children}</div>;
+export const Tile = ({ title, info }: TileProps): JSX.Element => {
+	return (
+		<article className={cls.Tile}>
+			<div className={cls.title}>
+				<p>{title}</p>
+			</div>
+			<p className={cls.info}>{info}</p>
+		</article>
+	);
 };
