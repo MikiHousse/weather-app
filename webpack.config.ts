@@ -44,6 +44,18 @@ export default (env: BuildEnv) => {
 					exclude: /node_modules/,
 				},
 				{
+					test: /\.mp4$/,
+					use: [
+						{
+							loader: 'file-loader',
+							options: {
+								name: '[name].[ext]',
+								outputPath: 'video',
+							},
+						},
+					],
+				},
+				{
 					test: /\.s[ac]ss$/i,
 					use: [
 						isDev ? 'style-loader' : MiniCssExtractPlugin.loader,

@@ -8,3 +8,38 @@ export const time = (milliseconds: number) => {
 
 	return `${hours}:${minutes}`;
 };
+
+export const pressureCalculation = (item: number) => {
+	return item / 100;
+};
+
+export const dayName = (now: number) => {
+	let name;
+	switch (+now) {
+		case 0:
+			name = 'Sunday';
+			break;
+		case 1:
+			name = 'Monday';
+			break;
+		case 2:
+			name = 'Tuesday';
+			break;
+		case 3:
+			name = 'Wednesday';
+			break;
+		case 4:
+			name = 'Thursday';
+			break;
+		case 5:
+			name = 'Friday';
+			break;
+		case 6:
+			name = 'Saturday';
+			break;
+		default:
+			name = '';
+			break;
+	}
+	return name;
+};

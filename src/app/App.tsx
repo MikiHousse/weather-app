@@ -24,6 +24,7 @@ export const App = ({}: AppProps) => {
 
 	return (
 		<div className='app'>
+			<video className='backgroundVideo' src='/video/video1.mp4' autoPlay muted loop></video>
 			<Main forecastData={forecastData} />
 		</div>
 	);

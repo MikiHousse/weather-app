@@ -11,3 +11,13 @@
   background-image: url('../image/night.jpg');
   height: 100vh;
 }
+
+.backgroundVideo {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 100%;
+  object-fit: cover;
+  height: 100vh;
+  z-index: -1;
+}
