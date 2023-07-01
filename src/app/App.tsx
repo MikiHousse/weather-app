@@ -1,4 +1,4 @@
-import { WeatherForecast } from 'components/WeatherForecast';
+import { Main } from 'components/Main';
 import { useEffect, useState } from 'react';
 import { forecastType } from 'types/types';
 import './style/index.scss';
@@ -24,7 +24,7 @@ export const App = ({}: AppProps) => {
 
 	return (
 		<div className='app'>
-			<WeatherForecast forecastData={forecastData} />
+			<Main forecastData={forecastData} />
 		</div>
 	);
 };
