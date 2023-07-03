@@ -20,8 +20,6 @@ export const App = ({}: AppProps) => {
 		return <div>...Loading</div>;
 	}
 
-	console.log(forecastData);
-
 	return (
 		<div className='app'>
 			<video className='backgroundVideo' src='/video/video1.mp4' autoPlay muted loop></video>
