@@ -44,13 +44,12 @@ export default (env: BuildEnv) => {
 					exclude: /node_modules/,
 				},
 				{
-					test: /\.mp4$/,
+					test: /\.(png|jpe?g|gif|mp4)$/i,
 					use: [
 						{
 							loader: 'file-loader',
 							options: {
-								name: '[name].[ext]',
-								outputPath: 'video',
+								name: 'dirname/[contenthash].[ext]',
 							},
 						},
 					],

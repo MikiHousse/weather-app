@@ -2,6 +2,9 @@ import { Main } from 'components/Main';
 import { useEffect, useState } from 'react';
 import { forecastType } from 'types/types';
 import './style/index.scss';
+import video1 from './video/video1.mp4';
+import video2 from './video/video2.mp4';
+import { time } from 'utils/utils';
 
 interface AppProps {}
 
@@ -20,9 +23,20 @@ export const App = ({}: AppProps) => {
 		return <div>...Loading</div>;
 	}
 
+	const list = time(forecastData.list[0].dt);
+	const background = (time: string) => {
+		let video;
+		if (String(time) >= '6:00' && String(time) < '18:00') {
+			video = video1;
+		} else {
+			video = video2;
+		}
+		return video;
+	};
+
 	return (
 		<div className='app'>
-			<video className='backgroundVideo' src='/video/video1.mp4' autoPlay muted loop></video>
+			<video className='backgroundVideo' src={background(String(list))} autoPlay muted loop></video>
 			<Main forecastData={forecastData} />
 		</div>
 	);
