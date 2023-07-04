@@ -41,3 +41,10 @@ export type forecastType = {
 	sunrise: number;
 	sunset: number;
 };
+
+export type searchType = {
+	name: string;
+	lat: number;
+	lon: number;
+	country: string;
+};

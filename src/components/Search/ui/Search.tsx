@@ -1,33 +1,50 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import cls from './Search.module.scss';
+import { searchType } from 'types/types';
 
 interface SearchProps {}
 export const Search = ({}: SearchProps) => {
-	const [value, setName] = useState('');
+	const [value, setValue] = useState('');
+	const [searchList, setSearchList] = useState<[]>([]);
+
 	const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
 		const value = e.target.value.trim();
-		setName(value);
+		setValue(value);
+		getSeatch(value);
+	};
 
-		if (value === '') {
-			return '';
-		}
+	const getSeatch = (value: string) => {
+		const API = `https://api.openweathermap.org/geo/1.0/direct?q=${value}&limit=8&appid=083a784422196bb0c3f148b1cfa6709a`;
+
+		fetch(API)
+			.then((response) => response.json())
+			.then((data) => (Array.isArray(data) ? setSearchList(data as any) : []))
+			.catch((err) => console.error(err));
 	};
 
 	console.log(value.trim());
+	console.log(searchList);
+	if (!searchList) {
+		return <div>...Loading</div>;
+	}
+
 	useEffect(() => {
-		fetch(
-			`https://api.openweathermap.org/geo/1.0/direct?q=${value.trim()}&limit=8&appid=083a784422196bb0c3f148b1cfa6709a`,
-		)
-			.then((response) => response.json())
-			.then((data) => console.log(data))
-			.catch((err) => console.error(err));
-	});
+		getSeatch;
+	}, [value, searchList]);
+	console.log(searchList.length === 0 ? searchList : '');
 	return (
 		<section className={cls.Search}>
 			<h1 className={cls.title}>Weather App</h1>
 			<p className={cls.description}>Write the name of the city to view the weather</p>
 			<div className={cls.searchForm}>
 				<input value={value} onChange={onInputChange} type='text' />
+				<ul className={cls.list}>
+					{searchList.map((el: searchType, i) => (
+						<li key={i}>
+							<button>{el.name}</button>
+						</li>
+					))}
+				</ul>
 				<div>
 					<button>Search</button>
 				</div>

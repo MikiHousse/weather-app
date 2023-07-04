@@ -30,7 +30,7 @@ export const App = ({}: AppProps) => {
 		if (String(time) >= '6:00' && String(time) < '18:00') {
 			video = video1;
 		} else {
-			video = video2;
+			video = video1;
 		}
 		return video;
 	};
