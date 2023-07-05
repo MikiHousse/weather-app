@@ -10,8 +10,8 @@ export const WeatherInfo = ({ forecastData }: WeatherInfoProps) => {
 	const list = forecastData.list[0];
 	return (
 		<section className={cls.info}>
-			<Tile title='Sun Rise' info={time(forecastData.city.sunrise)} />
-			<Tile title='Sun Set' info={time(forecastData.city.sunset)} />
+			<Tile title='Sun Rise' info={time(forecastData.sunrise)} />
+			<Tile title='Sun Set' info={time(forecastData.sunset)} />
 			<Tile title='Wind' info={`${Math.round(list.wind.speed)} km/h`} />
 			<Tile title='Feel like' info={`${Math.round(list.main.feels_like)}°`} />
 			<Tile title='Humidity' info={`${Math.round(list.main.humidity)}%`} />

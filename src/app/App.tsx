@@ -1,45 +1,46 @@
 import { Main } from 'components/Main';
-import { useEffect, useState } from 'react';
-import { forecastType } from 'types/types';
 import './style/index.scss';
 import video1 from './video/video1.mp4';
 import video2 from './video/video2.mp4';
 import { time } from 'utils/utils';
 import { Search } from 'components/Search';
+import { getInfo } from './api';
 
 interface AppProps {}
 
 export const App = ({}: AppProps) => {
-	const API =
-		'https://api.openweathermap.org/data/2.5/forecast?lat=55.7522&lon=37.6156&units=metric&lang=en&appid=083a784422196bb0c3f148b1cfa6709a';
-	const [forecastData, setForecastData] = useState<forecastType | null>(null);
-	useEffect(() => {
-		fetch(API)
-			.then((response) => response.json())
-			.then((data) => setForecastData(data))
-			.catch((err) => console.error(err));
-	}, []);
+	const { value, searchResult, onInputChange, forecastData, getToInfo, getSelect } = getInfo();
 
-	if (!forecastData) {
-		return <div>...Loading</div>;
-	}
-
-	const list = time(forecastData.list[0].dt);
+	const timeNow = time(forecastData?.list[0].dt);
 	const background = (time: string) => {
-		let video;
-		if (String(time) >= '6:00' && String(time) < '18:00') {
-			video = video1;
-		} else {
-			video = video1;
+		let text = 'white';
+		let video = video1;
+		const hours = Number(time.split(':')[0]);
+		const minutes = Number(time.split(':')[1]);
+		const totalMinutes = hours * 60 + minutes;
+		if (totalMinutes >= 6 * 60 && totalMinutes <= 18 * 60) {
+			video = video2;
+			text = 'black';
 		}
-		return video;
+		return { text, video };
 	};
 
+	const result = background(String(timeNow));
+
 	return (
-		<div className='app'>
-			<video className='backgroundVideo' src={background(String(list))} autoPlay muted loop></video>
-			{/* <Main forecastData={forecastData} /> */}
-			<Search />
+		<div className='app' style={{ color: `${result.text}` }}>
+			<video className='backgroundVideo' src={result.video} autoPlay muted loop></video>
+			{!forecastData ? (
+				<Search
+					value={value}
+					searchResult={searchResult}
+					onInputChange={onInputChange}
+					getToInfo={getToInfo}
+					getSelect={getSelect}
+				/>
+			) : (
+				<Main forecastData={forecastData} />
+			)}
 		</div>
 	);
 };
