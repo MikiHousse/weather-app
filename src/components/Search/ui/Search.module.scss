@@ -1,5 +1,5 @@
 .Search {
-  padding-top: 50%;
+  padding-top: 100px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -40,9 +40,20 @@
 }
 
 .list {
+  border-radius: 5px;
   color: black;
   position: absolute;
-  top: 366px;
+  top: 216px;
   z-index: 10;
   background-color: white;
+  list-style: none;
+  width: 145px;
+}
+
+.list>li {
+  cursor: pointer;
+
+  &:hover {
+    background-color: #ededed;
+  }
 }

@@ -6,6 +6,7 @@ interface SearchProps {}
 export const Search = ({}: SearchProps) => {
 	const [value, setValue] = useState('');
 	const [searchList, setSearchList] = useState<[]>([]);
+	const [select, setSelect] = useState(null);
 
 	const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
 		const value = e.target.value.trim();
@@ -22,8 +23,12 @@ export const Search = ({}: SearchProps) => {
 			.catch((err) => console.error(err));
 	};
 
-	console.log(value.trim());
-	console.log(searchList);
+	const getSelect = (item: searchType) => {
+		setSelect(item);
+		setValue(item.name);
+		setSearchList([]);
+	};
+
 	if (!searchList) {
 		return <div>...Loading</div>;
 	}
@@ -31,7 +36,7 @@ export const Search = ({}: SearchProps) => {
 	useEffect(() => {
 		getSeatch;
 	}, [value, searchList]);
-	console.log(searchList.length === 0 ? searchList : '');
+
 	return (
 		<section className={cls.Search}>
 			<h1 className={cls.title}>Weather App</h1>
@@ -39,11 +44,13 @@ export const Search = ({}: SearchProps) => {
 			<div className={cls.searchForm}>
 				<input value={value} onChange={onInputChange} type='text' />
 				<ul className={cls.list}>
-					{searchList.map((el: searchType, i) => (
-						<li key={i}>
-							<button>{el.name}</button>
-						</li>
-					))}
+					{searchList.length !== 0
+						? searchList.map((el: searchType, i) => (
+								<li key={i} onClick={() => getSelect(el)}>
+									{el.name}
+								</li>
+						  ))
+						: []}
 				</ul>
 				<div>
 					<button>Search</button>
